@@ -55,24 +55,23 @@ def home(request):
 	print('LoginUSer:', loginuser)
 	client_checked= None
 
-	options = Options()
-	options.headless = True
-	driver = webdriver.Firefox(options=options)
-	main_url = "https://www.instagram.com/accounts/login/"
-	driver.get(main_url)
-
-	time.sleep(4)
-	user_name = "testingdjango009@gmail.com"
-	password = "ShAn123456"
-	driver.find_element_by_name("username").send_keys(user_name)
-	driver.find_element_by_name("password").send_keys(password)   
-	driver.find_elements_by_tag_name("button")[1].click()
-
-	WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[4]/a')))
-	driver.get('https://www.instagram.com/' + str(user_name))
-	time.sleep(7)
-
 	if request.method == 'POST':
+		options = Options()
+		options.headless = False
+		driver = webdriver.Firefox(options=options)
+		main_url = "https://www.instagram.com/accounts/login/"
+		driver.get(main_url)
+
+		time.sleep(4)
+		user_name = "testingdjango009@gmail.com"
+		password = "ShAn123456"
+		driver.find_element_by_name("username").send_keys(user_name)
+		driver.find_element_by_name("password").send_keys(password)   
+		driver.find_elements_by_tag_name("button")[1].click()
+
+		WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[4]/a')))
+		driver.get('https://www.instagram.com/' + str(user_name))
+		time.sleep(7)
 		username = request.POST.get('username')
 		driver.get('https://www.instagram.com/' + str(username))
 		# page source
@@ -91,115 +90,126 @@ def home(request):
 		followers_temp = details[0]
 		following = details[1]
 		posts = details[2]
-		print(status,"\nfollowers", followers,"\nfollowing:",following)
+		print(status,"\nfollowers", followers_temp,"\nfollowing:",following)
 
 		client_checked= request.POST.get('is_client')
 		print('client_checked:' , client_checked)
-		if followers != None and client_checked == 'is_client' :
+		if followers_temp != None and client_checked:
 			instaAccountObj = instaAccounts.objects.create(user=loggedUser[0], username=username,is_client=True)
 			instaAccountObj.save()
 		else:
 			instaAccountObj = instaAccounts.objects.create(user=loggedUser[0], username=username,is_client=False)
 			instaAccountObj.save()
-	
-		
-	comparisonObj = instaAccounts.objects.filter(user = loggedUser[0] )
 
-	for compair in comparisonObj:
-		username = compair.username	
-		client=compair.is_client
-		driver.get('https://www.instagram.com/' + str(username))
-		# page source
-		source = driver.page_source
-		# scrapper
-		s= BeautifulSoup(source, "html.parser")
-		tag= s.find("meta",  {"name" : "description"})
-		try:
-			text= tag.attrs["content"]
-		except:
-				pass
+	comparisonObj = instaAccounts.objects.filter(user = request.user)
 
-		status= text.split("-")[0]
-		details = status.split(",")
-		print(details)
-		followers_temp = details[0]
-		following = details[1]
-		posts = details[2]
-		print(status,"\nfollowers", followers,"\nfollowing:",following)
+	if comparisonObj:
+		options = Options()
+		options.headless = False
+		driver = webdriver.Firefox(options=options)
+		main_url = "https://www.instagram.com/accounts/login/"
+		driver.get(main_url)
 
-		followers = 0
-		if 'm' in followers_temp:
-			temp = followers_temp.split('m')
-			num = float(temp[0])
-			followers = num*1000000
-		elif 'k' in followers_temp:
-			temp = followers_temp.split('m')
-			num = float(temp[0])
-			followers = num*1000
-		else:
-			temp = followers_temp.split(' ')
-			num = float(temp[0])
-			followers = num
-		
-		temp = {'username':username,'followers':followers, 'is_client': client }
-		list_of_followers.append(temp)
+		time.sleep(4)
+		user_name = "testingdjango009@gmail.com"
+		password = "ShAn123456"
+		driver.find_element_by_name("username").send_keys(user_name)
+		driver.find_element_by_name("password").send_keys(password)   
+		driver.find_elements_by_tag_name("button")[1].click()
+
+		WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[4]/a')))
+		driver.get('https://www.instagram.com/' + str(user_name))
+		time.sleep(7)
+
+		for compair in comparisonObj:
+			username = compair.username	
+			client=compair.is_client
+			driver.get('https://www.instagram.com/' + str(username))
+			# page source
+			source = driver.page_source
+			# scrapper
+			s= BeautifulSoup(source, "html.parser")
+			tag= s.find("meta",  {"name" : "description"})
+			try:
+				text= tag.attrs["content"]
+			except:
+					pass
+
+			status= text.split("-")[0]
+			details = status.split(",")
+			print(details)
+			followers_temp = details[0]
+			following = details[1]
+			posts = details[2]
+			print(status,"\nfollowers", followers_temp,"\nfollowing:",following)
+
+			followers = 0
+			if 'm' in followers_temp:
+				temp = followers_temp.split('m')
+				num = float(temp[0])
+				followers = num*1000000
+			elif 'k' in followers_temp:
+				temp = followers_temp.split('m')
+				num = float(temp[0])
+				followers = num*1000
+			else:
+				print(followers_temp,"***********")
+				temp = followers_temp.split(' ')
+				print(temp[0],"***********")
+				num = float(temp[0])
+				followers = num
+			
+			temp = {'username':username,'followers':followers, 'is_client': client }
+			list_of_followers.append(temp)
+			newlist = sorted(list_of_followers, key=lambda d: d['followers'], reverse=True) 
+			
+			Topperelement= newlist[0]
+			TopperFollowers=Topperelement.get('followers')
+			print('Followers1',TopperFollowers)
+		print('New list', newlist)
+
 		newlist = sorted(list_of_followers, key=lambda d: d['followers'], reverse=True) 
-		
+
 		Topperelement= newlist[0]
 		TopperFollowers=Topperelement.get('followers')
-		print('Followers1',TopperFollowers)
-	print('New list', newlist)
 
-	# temp = {'username':'tayyabimran8','followers':100, 'is_client': True }
-	# list_of_followers.append(temp)
+		finalList = []
+		for l in range(len(newlist)):
+			if l != len(newlist) and l !=0:
+				temp = {
+					'username':newlist[l]['username'],
+					'followers':newlist[l]['followers'], 
+					'is_client': newlist[l]['is_client'], 
+					'to_step_up': int(newlist[l-1]['followers'])-int(newlist[l]['followers']),
+					'to_top': newlist[0]['followers']-int(newlist[l]['followers']),
+				}
+				finalList.append(temp)
+			elif l == 0:
+				temp = {
+					'username':newlist[0]['username'],
+					'followers':newlist[0]['followers'], 
+					'is_client': newlist[0]['is_client'], 
+					'to_step_up': 0,
+					'to_top': 0,
+				}
+				finalList.append(temp)
 
-	# temp = {'username':'chk','followers':40, 'is_client': False }
-	# list_of_followers.append(temp)
-
-	# temp = {'username':'no Client2','followers':80, 'is_client': False }
-	# list_of_followers.append(temp)
-
-	# temp = {'username':'chk2','followers':20, 'is_client': False }
-	# list_of_followers.append(temp)
-
-	# temp = {'username':'no Client','followers':30, 'is_client': False }
-	# list_of_followers.append(temp)
-
-	newlist = sorted(list_of_followers, key=lambda d: d['followers'], reverse=True) 
-
-	Topperelement= newlist[0]
-	TopperFollowers=Topperelement.get('followers')
-
-	finalList = []
-	for l in range(len(newlist)):
-		if l != len(newlist) and l !=0:
-			temp = {
-				'username':newlist[l]['username'],
-				'followers':newlist[l]['followers'], 
-				'is_client': newlist[l]['is_client'], 
-				'to_step_up': int(newlist[l-1]['followers'])-int(newlist[l]['followers']),
-				'to_top': newlist[0]['followers']-int(newlist[l]['followers']),
-			}
-			finalList.append(temp)
-		elif l == 0:
-			temp = {
-				'username':newlist[0]['username'],
-				'followers':newlist[0]['followers'], 
-				'is_client': newlist[0]['is_client'], 
-				'to_step_up': 0,
-				'to_top': 0,
-			}
-			finalList.append(temp)
-
-	channelindb= ChannelSelector.objects.filter(user=loggedUser[0]) 
+		channelindb= ChannelSelector.objects.filter(user=request.user) 
+		if channelindb.exists():
+			channelindb = channelindb[0]
+		
+		context = {
+			'topper_followers': TopperFollowers,
+			'channel': channelindb,
+			'comparisonObj':finalList,
+		}
+		return render(request,'User/home.html',context)
+	channelindb= ChannelSelector.objects.filter(user=request.user) 
 	if channelindb.exists():
 		channelindb = channelindb[0]
-	
 	context = {
-		'topper_followers': TopperFollowers,
-		'channel': channelindb,
-		'comparisonObj':finalList,
-	}
+			'channel': channelindb,
+		}
 	return render(request,'User/home.html',context)
 
 
