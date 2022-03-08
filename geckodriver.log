@@ -1,0 +1,43 @@
+1646758649817	geckodriver	INFO	Listening on 127.0.0.1:52896
+1646758653191	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52897" "-no-remote" "-profile" "C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileNR9Adi"
+1646758654649	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileNR9Adi\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:52897/devtools/browser/9f18297d-61e9-40f0-8f16-ae83c1f45ef0
+1646758659292	Marionette	INFO	Listening on port 52910
+1646758659702	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1646758701686	Marionette	INFO	Stopped listening on port 52910
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1646758943532	geckodriver	INFO	Listening on 127.0.0.1:53619
+1646758946598	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53620" "-no-remote" "-profile" "C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileZ7X9El"
+1646758947401	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileZ7X9El\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53620/devtools/browser/51f7f04d-9be7-4ed9-9dad-6cea66f0e63c
+1646758951477	Marionette	INFO	Listening on port 53629
+1646758951936	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1646759034941	Marionette	INFO	Stopped listening on port 53629
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1646759116605	geckodriver	INFO	Listening on 127.0.0.1:53970
+1646759119684	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53971" "-no-remote" "-profile" "C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileUJ6VIR"
+1646759120310	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileUJ6VIR\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53971/devtools/browser/167b5731-6d38-4a66-b768-972cb42c66b6
+1646759124125	Marionette	INFO	Listening on port 53982
+1646759124521	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.instagram.com"
+1646759156677	Marionette	INFO	Stopped listening on port 53982
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_RemoveCorsPreflightCacheEntry) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_Cancel) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+

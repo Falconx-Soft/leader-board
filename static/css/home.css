@@ -1,0 +1,23 @@
+.input-div{
+	
+	justify-content: center;
+	padding: 20px;
+}
+
+.client-div-list{
+	display: flex;
+	justify-content: center;
+}
+
+.form-area{
+	background-color:white;
+	padding: 40px;
+	border-radius: 20px;
+}
+
+.client-name{
+	height: 102px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

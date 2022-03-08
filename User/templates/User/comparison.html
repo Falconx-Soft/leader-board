@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% load subtraction  %}
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+    #competitor_followers{
+        font-size: large;
+        font-weight: 600;
+    }
+    #competitor_name{
+        background: #67adff; width: 256px; margin-top: -6px; padding: 10px; margin-left: -7px; border: 2px solid #064d9e;
+    }
+</style>
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+{% endblock %}
+
+{% block content %}	
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+			<h1>{{client.username}}</h1>
+            <div class="input-div">
+                <form class="form-inline form-area" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-2">
+                        <label for="staticEmail2" class="sr-only">Competitor</label>
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Add a competitor">
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only">Competitor</label>
+                        <input type="text" class="form-control" name="competitor" placeholder="username">
+                    </div>
+                    <button type="submit" class="btn  btn-primary mb-2">Add</button>
+                </form>
+            </div>
+
+            <div class="client-div-list">
+                <div class="col-md-6 col-xl-4" style="" >
+                     {% for comparis in comparisonObj %} 
+                        <div class="card py-3 pb-5" style="background: radial-gradient(#64acff, transparent); ">
+							<div class="card-body client-name" style="display: block; padding-top: 0;">
+                                {% if comparis.followers == topper_followers %}
+                                <p class="float-right">Topper</p>
+								<h5 id="competitor_name " style="background: #67adff; width: 256px; margin-top: -6px; padding: 10px; margin-left: -7px; border: 2px solid #064d9e;">{{comparis.username}}</h5> 
+								<p id="competitor_followers">Followers: {{comparis.followers}}</p>
+                                <p id="top_followers">You are On TOP</p>
+                                
+                                {% else %}
+                                <p id="top_followers " class="float-right" >topper: {{topper_followers}}</p>
+                                <h5 id="competitor_name" style="">{{comparis.username}}</h5> 
+								<p id="competitor_followers">Followers: {{comparis.followers}}</p>
+                                
+                                <p>You Need {{comparis.followers|subtraction:topper_followers}} Followers to get to top</p>
+                                {% endif %}
+							</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+    <script>
+        var competitor_followers= parseInt(document.getElementById("competitor_followers").value)
+        console.log('competitoe' , competitor_followers)
+        var topper= document.getElementById("top_followers").value
+    </script>
+
+{% endblock javascripts %}
