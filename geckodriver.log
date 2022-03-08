@@ -179,3 +179,14 @@ JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_
 
 ###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
 
+1646771768384	geckodriver	INFO	Listening on 127.0.0.1:50278
+1646771771435	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50279" "-no-remote" "-profile" "C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileCSGNnG"
+1646771772627	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\SHAN\\AppData\\Local\\Temp\\rust_mozprofileCSGNnG\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50279/devtools/browser/8002d75a-249a-4553-aad0-b93cc1796b46
+1646771777717	Marionette	INFO	Listening on port 50288
+1646771777839	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.instagram.com"
+1646771790100	Marionette	INFO	Stopped listening on port 50288
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]

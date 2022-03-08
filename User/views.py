@@ -55,9 +55,9 @@ def home(request):
 	print('LoginUSer:', loginuser)
 	client_checked= None
 
-	chrome_options = webdriver.ChromeOptions()
-	chrome_options.headless =  True
-	driver = webdriver.Chrome( options=chrome_options)
+	options = Options()
+	options.headless = True
+	driver = webdriver.Firefox(options=options)
 	main_url = "https://www.instagram.com/accounts/login/"
 	driver.get(main_url)
 
