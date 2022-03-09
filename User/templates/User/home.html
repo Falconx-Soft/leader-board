@@ -108,20 +108,20 @@
                         
                         {% for comparis in comparisonObj %} 
                         {% if comparis.is_client == True %} 
-                        <div class="card py-3 pb-5" style="background: radial-gradient(#ff6464, transparent); ">
+                        <div class="card py-3 pb-5" style="background: radial-gradient(#ff6464, transparent); width: 460px;">
                             <div class="card-body client-name" style="display: block; padding-top: 0; height: 180px;">
                                 {% if comparis.followers == topper_followers %}
                                 <p class="float-right">Topper</p>
                                 <h5 id="competitor_name " style="background: #ff6c67; width: 256px; margin-top: -6px; padding: 10px; margin-left: -7px; border: 2px solid #064d9e;">{{comparis.username}}</h5> 
                                 <p id="competitor_followers">Followers: {{comparis.followers}}</p>
-                                <p id="top_followers">You are On TOP</p>
+                                <p id="top_followers">#1</p>
                                 
                                 {% else %}
                                 <p id="top_followers " class="float-right" >topper: {{topper_followers}}</p>
                                 <h5 id="competitor_name">{{comparis.username}}</h5> 
                                 <p id="competitor_followers">Followers: {{comparis.followers}}</p>
-                                <p id="competitor_followers">To move one step: {{comparis.to_step_up}}</p>
-                                <p id="competitor_followers">To move to top: {{comparis.to_top}}</p>
+                                <p id="competitor_followers">To move #{{comparis.position}} : {{comparis.to_step_up}}</p>
+                                <p id="competitor_followers">To move to #1 : {{comparis.to_top}}</p>
                             
                                 {% endif %}
                             </div>
@@ -129,7 +129,7 @@
                         
                         {% else %}
                     
-                        <div class="card py-3 pb-5" style="background: radial-gradient(#64acff, transparent); ">
+                        <div class="card py-3 pb-5" style="background: radial-gradient(#64acff, transparent); width: 460px;">
                             <div class="card-body client-name" style="display: block; padding-top: 0; height: 180px;">
                                 {% if comparis.followers == topper_followers %}
                                 <p class="float-right">Topper</p>

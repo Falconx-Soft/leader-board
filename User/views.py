@@ -57,7 +57,7 @@ def home(request):
 
 	if request.method == 'POST':
 		options = Options()
-		options.headless = False
+		options.headless = True
 		driver = webdriver.Firefox(options=options)
 		main_url = "https://www.instagram.com/accounts/login/"
 		driver.get(main_url)
@@ -105,7 +105,7 @@ def home(request):
 
 	if comparisonObj:
 		options = Options()
-		options.headless = False
+		options.headless = True
 		driver = webdriver.Firefox(options=options)
 		main_url = "https://www.instagram.com/accounts/login/"
 		driver.get(main_url)
@@ -182,6 +182,7 @@ def home(request):
 					'is_client': newlist[l]['is_client'], 
 					'to_step_up': int(newlist[l-1]['followers'])-int(newlist[l]['followers']),
 					'to_top': newlist[0]['followers']-int(newlist[l]['followers']),
+					'position':l,
 				}
 				finalList.append(temp)
 			elif l == 0:
@@ -191,6 +192,7 @@ def home(request):
 					'is_client': newlist[0]['is_client'], 
 					'to_step_up': 0,
 					'to_top': 0,
+					'position':0,
 				}
 				finalList.append(temp)
 
@@ -253,7 +255,7 @@ def register(request):
 			accountsCheck_obj = accountsCheck.objects.create(user=user, auth_token = auth_token)
 			accountsCheck_obj.save()
 
-			verificationMain(user.email,auth_token)
+			verificationMain(request,user.email,auth_token)
 
 			msg = 'Verifecation Link has been send to your mail. Kindly verify it.'
 			context = {'form':form, 'msg':msg}
@@ -270,9 +272,9 @@ def verify(request, auth_token):
         accountsCheck_obj.save()
         return redirect('login')
 
-def verificationMain(email, auth_token):
+def verificationMain(request,email, auth_token):
     subject = 'Please verify your account'
-    message = f'Hi please click on the link to verify your account http://localhost:8000/verify/{auth_token}'
+    message = f'Hi please click on the link to verify your account {request.build_absolute_uri()}verify/{auth_token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject,message,email_from, recipient_list)
