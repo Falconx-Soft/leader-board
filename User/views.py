@@ -57,7 +57,7 @@ def home(request):
 
 	if request.method == 'POST':
 		options = Options()
-		options.headless = True
+		options.headless = False
 		driver = webdriver.Firefox(options=options)
 		main_url = "https://www.instagram.com/accounts/login/"
 		driver.get(main_url)
@@ -88,9 +88,6 @@ def home(request):
 		details = status.split(",")
 		print(details)
 		followers_temp = details[0]
-		following = details[1]
-		posts = details[2]
-		print(status,"\nfollowers", followers_temp,"\nfollowing:",following)
 
 		client_checked= request.POST.get('is_client')
 		print('client_checked:' , client_checked)
@@ -105,7 +102,7 @@ def home(request):
 
 	if comparisonObj:
 		options = Options()
-		options.headless = True
+		options.headless = False
 		driver = webdriver.Firefox(options=options)
 		main_url = "https://www.instagram.com/accounts/login/"
 		driver.get(main_url)
@@ -139,9 +136,6 @@ def home(request):
 			details = status.split(",")
 			print(details)
 			followers_temp = details[0]
-			following = details[1]
-			posts = details[2]
-			print(status,"\nfollowers", followers_temp,"\nfollowing:",following)
 
 			followers = 0
 			if 'm' in followers_temp:
